@@ -1,0 +1,19 @@
+.headerApp {
+    background-color: gray;
+	text-align: center;
+    height: 100%;
+}
+.img-sideBySide{
+    float: left;
+    width: 50%;
+    display: flex;
+    padding: 5px;
+}
+
+.Button-sideBySideRigt{
+    float: right;
+    width: 50%;
+    display: flex;
+    padding: 5px;
+    align-items: right;
+}
