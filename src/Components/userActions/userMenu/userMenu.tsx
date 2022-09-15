@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import user_details from "../../../models/user_details";
 import { store } from "../../../redux/store";
 import { deleteUser } from "../../../redux/userState";
@@ -11,8 +11,6 @@ import "./userMenu.css";
 
 function UserMenu(): JSX.Element {
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const{userEmail} = location.state as any;
     const [user, setUser] = useState(new user_details());
     const goBack = ()=>{
         navigate("/");
