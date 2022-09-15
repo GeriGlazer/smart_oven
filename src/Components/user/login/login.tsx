@@ -13,8 +13,10 @@ import recipe_details from './../../../models/recipe_details';
 import { downloadAllRecipes } from './../../../redux/recipeState';
 
 function Login(): JSX.Element {
-    const {register, handleSubmit, formState: { errors },} = useForm<user_details>();
+    const {register, handleSubmit,} = useForm<user_details>();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const send = (details: user_details)=>{
         axios.post(globals.url.login, details)
         .then((response)=>{
@@ -31,9 +33,9 @@ function Login(): JSX.Element {
            dispatch(downloadAllRecipes(response.data));
         }) 
         .catch((err)=>{console.error(err.response.data.details)});
-        navigate("/");
+        navigate("/user/menu");
     }
-    const navigate = useNavigate();
+
     const goBack = ()=>{
         navigate("/");
     }

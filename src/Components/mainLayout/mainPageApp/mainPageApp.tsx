@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import recipe_details from "../../../models/recipe_details";
 import { downloadAllRecipes } from "../../../redux/recipeState";
 import { store } from "../../../redux/store";
@@ -13,24 +14,19 @@ import "./mainPageApp.css";
 function MainPageApp(): JSX.Element {
     const dispatch = useDispatch();
     const userEmail = store.getState().AuthState.userEmail;
-    const [recipes, setRecipes] = useState<recipe_details[]>([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
-        axios.get<recipe_details[]>(globals.url.getAllRecipes)
-        .then((response)=>{
-            setRecipes(response.data)
-           dispatch(downloadAllRecipes(response.data));
-        }) 
-        .catch((err)=>{console.error(err.response.data.details)});
+        if(userEmail!==""){
+            navigate("/user/menu");
+        }
+        else{
+            navigate("/user/login");
+        }
     }, []);
 
-
     return (
-        <div className="mainPageApp" style={{textAlign:"center"}}>
-            <Typography color={'red'} variant="h2" className="HeadLine">On the menu</Typography>
-			
-           {recipes.map(item=><SingleRecipe key= {item.name} recipe={item} />)}
-            
+        <div className="mainPageApp" >
         </div>
     );
 }

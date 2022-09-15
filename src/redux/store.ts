@@ -7,8 +7,8 @@ import { RecipeState, RecipeReducer } from './recipeState';
 const combine = combineReducers({AuthState:AuthReducer, UserState:UserReducer, RecipeState:RecipeReducer})
 export const store = configureStore({
     reducer: combine,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    immutableCheck: false,
-    serializableCheck: false,
-})
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    // immutableCheck: false,
+    // serializableCheck: false,
+        //})
 });

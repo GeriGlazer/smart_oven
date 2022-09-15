@@ -1,6 +1,4 @@
 import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import recipe_details from "../../../models/recipe_details";
 import { store } from "../../../redux/store";
@@ -13,9 +11,19 @@ interface SingleRecipeProps{
 function SingleRecipe(props: SingleRecipeProps): JSX.Element {
     const navigate = useNavigate();
     const userEmail = store.getState().AuthState.userEmail;
+    const recipesList = store.getState().RecipeState.recipe;
+    const recipeName = props.recipe.name;
     const updateRecipe = ()=>{
-        navigate("recipeActions/updateRecipe", {state:{recipeName:props.recipe.name}});
+        navigate("/recipeActions/updateRecipe", {state:{recipeName:props.recipe.name}});
     }
+
+    // const recipeName = ()=>{
+    //     const newName = props.recipe.name;
+    //     if (newName.includes("-")) {
+    //         newName.replace("-myRecipe", ".");
+    //     }
+    //     return newName;
+    // };
 
     const cookTimeHours = props.recipe.cookTime/3600;
     const sprayInterval = sprayIntervalFormula(props.recipe.sprayNozzleInterval/60000);
@@ -24,7 +32,6 @@ function SingleRecipe(props: SingleRecipeProps): JSX.Element {
         if(userEmail !== ""){
            return(
             <>
-                {/* <Button color="primary" onClick={updateRecipe}>Update Recipe</Button> */}
                 <Button variant="contained" color="primary" type="submit" style={{padding:20, margin:20}}>start</Button>
             </>
            )
@@ -39,6 +46,7 @@ function SingleRecipe(props: SingleRecipeProps): JSX.Element {
             internal {props.recipe.internalMeatTemperature} °C<hr/>
             Spray marinade every: {sprayInterval} Hs.
             {showOpt()}
+            <Button variant="contained" color="success" onClick={updateRecipe}>Update</Button>
         </div>
     );
 }

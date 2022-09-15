@@ -24,7 +24,7 @@ function UserMenu(): JSX.Element {
 
     const deleteAccount = ()=>{
         axios.delete(globals.url.deleteUser+user.email)
-        .then((response)=>{
+        .then(()=>{
             store.dispatch(deleteUser(user.email))
         })
         .catch((err)=>{console.error(err.response.data)});
